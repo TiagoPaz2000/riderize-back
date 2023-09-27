@@ -1,12 +1,12 @@
-import RideValidator from '@/domain/usecases/ride-validator'
 import AddRidesController from '@/presentation/controllers/add-rides-controller'
 import { makeRideValidatorStub } from '../../stubs/usecases/ride-validator-stub'
-
+import { makeRidesModelStub } from '../../stubs/usecases/ride-model-stub'
 
 describe('AddRidesController', () => {
   const makeSut = () => {
     const rideValidatorStub = makeRideValidatorStub()
-    const sut = new AddRidesController(rideValidatorStub)
+    const ridesModelStub = makeRidesModelStub()
+    const sut = new AddRidesController(rideValidatorStub, ridesModelStub)
     return { sut, rideValidatorStub }
   }
 
