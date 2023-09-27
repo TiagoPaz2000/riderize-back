@@ -18,7 +18,7 @@ export default class AddRidesController implements IController {
         }
       }
 
-      const rides = this.ridesModel.add(request.body)
+      const rides = await this.ridesModel.add(request.body)
 
       return {
         statusCode: 201,
