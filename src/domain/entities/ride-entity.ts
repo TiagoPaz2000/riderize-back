@@ -1,4 +1,4 @@
-export default interface RideEntity {
+export default interface RidesEntity {
   id: string
   name: string,
   startDate: Date,
