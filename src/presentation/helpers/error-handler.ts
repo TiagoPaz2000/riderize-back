@@ -10,6 +10,6 @@ export const errorHandler = (error: Error): IHttpResponse => {
   }
   return {
     statusCode: 500,
-    body: error.message,
+    body: "Internal server error",
   }
 }
