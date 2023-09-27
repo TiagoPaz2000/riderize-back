@@ -1,24 +1,28 @@
-import RideValidator from '@/domain/usecases/ride-validator'
+import RidesValidator from '@/domain/usecases/rides-validator'
 import { IController } from '../protocols/controller-protocol'
 import { IHttpRequest, IHttpResponse } from '../protocols/http-protocol'
 import ErrorEntity from '@/domain/entities/error-entity'
 import { errorHandler } from '../helpers/error-handler'
+import RidesModel from '@/domain/entities/rides-model'
 
 export default class AddRidesController implements IController {
-  constructor(private rideValidator: RideValidator) {}
+  constructor(private ridesValidator: RidesValidator, private ridesModel: RidesModel) {}
 
   async handle(request: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const isValid = this.rideValidator.validate(request.body)
+      const isValid = this.ridesValidator.validate(request.body)
       if (!isValid) {
         return {
           statusCode: 400,
           body: 'Missing params',
         }
       }
+
+      const rides = this.ridesModel.add(request.body)
+
       return {
         statusCode: 201,
-        body: 'Ride created successfully!',
+        body: rides,
       }
     } catch (error) {
       return errorHandler(error as Error)
