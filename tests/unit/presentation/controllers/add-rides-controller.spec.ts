@@ -7,11 +7,11 @@ describe('AddRidesController', () => {
     return { sut }
   }
 
-  it('should return 200 if everything is ok', async () => {
+  it('should return 201 if everything is ok', async () => {
     const { sut } = makeSut()
 
     const httpResponse = await sut.handle({ body: {} })
 
-    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.statusCode).toBe(201)
   })
 })
