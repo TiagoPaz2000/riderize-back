@@ -28,4 +28,17 @@ describe('AddRidesController', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toBe('Missing params')
   })
+
+  it('should return 500 if RideValidator throws', async () => {
+    const { sut, rideValidatorStub } = makeSut()
+
+    jest.spyOn(rideValidatorStub, 'validate').mockImplementationOnce(() => {
+      throw new Error()
+    })
+
+    const httpResponse = await sut.handle({ body: {} })
+
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toBe('Internal server error')
+  })
 })
