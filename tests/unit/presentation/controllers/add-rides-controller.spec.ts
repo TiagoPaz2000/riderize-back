@@ -1,6 +1,7 @@
 import AddRidesController from '@/presentation/controllers/add-rides-controller'
 import { makeRideValidatorStub } from '../../stubs/usecases/ride-validator-stub'
 import { makeRidesModelStub } from '../../stubs/usecases/ride-model-stub'
+import { ridesMock } from '../../stubs/mocks/rides-mock'
 
 describe('AddRidesController', () => {
   const makeSut = () => {
@@ -10,12 +11,13 @@ describe('AddRidesController', () => {
     return { sut, rideValidatorStub }
   }
 
-  it('should return 201 if everything is ok', async () => {
+  it('should return 201 and new ride if everything is ok', async () => {
     const { sut } = makeSut()
 
     const httpResponse = await sut.handle({ body: {} })
 
     expect(httpResponse.statusCode).toBe(201)
+    expect(httpResponse.body).toEqual(ridesMock[0])
   })
 
   it('should return 400 if RideValidator returns false and error message', async () => {

@@ -1,7 +1,8 @@
 import RidesEntity from "@/domain/entities/ride-entity";
 
-export const ridesMock: Omit<RidesEntity, 'id'>[] = [
+export const ridesMock: RidesEntity[] = [
   {
+    id: 'any id',
     name: 'any name',
     startDate: new Date(),
     startDateRegistration: new Date(),
