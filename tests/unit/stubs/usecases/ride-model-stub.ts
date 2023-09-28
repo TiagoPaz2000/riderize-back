@@ -4,7 +4,7 @@ import RidesEntity from "@/domain/entities/ride-entity"
 
 export const makeRidesModelStub = (): RidesModel => {
   class RidesModelStub implements RidesModel {
-    add(Ride: RidesEntity): Promise<Omit<RidesEntity, 'id'>> {
+    add(Ride: Omit<RidesEntity, 'id'>): Promise<RidesEntity> {
       return new Promise(resolve => resolve(ridesMock[0]))
     }
   
