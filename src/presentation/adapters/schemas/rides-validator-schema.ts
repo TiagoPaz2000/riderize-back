@@ -1,4 +1,3 @@
-import RidesEntity from '@/domain/entities/ride-entity';
 import { object, string, number, date } from 'zod'
 
 export const ridesSchema = object({

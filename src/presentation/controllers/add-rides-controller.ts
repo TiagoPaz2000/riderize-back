@@ -10,13 +10,7 @@ export default class AddRidesController implements IController {
 
   async handle(request: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const isValid = await this.ridesValidator.validate(request.body)
-      if (!isValid) {
-        return {
-          statusCode: 400,
-          body: 'Missing params',
-        }
-      }
+      await this.ridesValidator.validate(request.body)
 
       const rides = await this.ridesModel.add(request.body)
 
