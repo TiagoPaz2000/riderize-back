@@ -29,5 +29,14 @@ describe('RidesValidatorAdapter', () => {
 
     await expect(promise).rejects.toThrow()
   })
-  
+
+  it('should test if ridesSchema.parseAsync is called with correct values', async () => {
+    const { sut } = makeSut()
+
+    const parseAsyncSpy = jest.spyOn(ridesSchema, 'parseAsync')
+
+    await sut.validate(ridesMock[0])
+
+    expect(parseAsyncSpy).toHaveBeenCalledWith(ridesMock[0])
+  })
 })
