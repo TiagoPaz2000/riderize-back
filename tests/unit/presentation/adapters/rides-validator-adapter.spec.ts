@@ -15,4 +15,13 @@ describe('RidesValidatorAdapter', () => {
 
     expect(isValid).toBe(true)
   })
+
+  it('should throw if data is not ok', async () => {
+    const { sut } = makeSut()
+
+    const promise = sut.validate({})
+
+    await expect(promise).rejects.toThrow()
+  })
+  
 })
