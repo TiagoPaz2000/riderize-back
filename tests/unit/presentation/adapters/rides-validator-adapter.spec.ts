@@ -1,5 +1,6 @@
 import RidesValidatorAdapter from "@/presentation/adapters/rides-validator-adapter"
 import { ridesMock } from "../../stubs/mocks/rides-mock"
+import { ridesSchema } from "@/presentation/adapters/schemas/rides-validator-schema"
 
 describe('RidesValidatorAdapter', () => {
   const makeSut = () => {
@@ -11,6 +12,8 @@ describe('RidesValidatorAdapter', () => {
   it('should return true if data is ok', async () => {
     const { sut } = makeSut()
 
+    jest.spyOn(ridesSchema, 'parseAsync').mockReturnValueOnce(Promise.resolve(ridesMock[0]))
+
     const isValid = await sut.validate(ridesMock[0])
 
     expect(isValid).toBe(true)
@@ -18,6 +21,9 @@ describe('RidesValidatorAdapter', () => {
 
   it('should throw if data is not ok', async () => {
     const { sut } = makeSut()
+
+    jest.spyOn(ridesSchema, 'parseAsync')
+      .mockImplementationOnce(() => { throw new Error() })
 
     const promise = sut.validate({})
 
