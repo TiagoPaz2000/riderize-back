@@ -10,7 +10,7 @@ export default class AddRidesController implements IController {
 
   async handle(request: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const isValid = this.ridesValidator.validate(request.body)
+      const isValid = await this.ridesValidator.validate(request.body)
       if (!isValid) {
         return {
           statusCode: 400,

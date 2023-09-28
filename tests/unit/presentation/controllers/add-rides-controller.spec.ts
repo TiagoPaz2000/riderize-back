@@ -23,7 +23,7 @@ describe('AddRidesController', () => {
   it('should return 400 if RideValidator returns false and error message', async () => {
     const { sut, rideValidatorStub } = makeSut()
 
-    jest.spyOn(rideValidatorStub, 'validate').mockReturnValueOnce(false)
+    jest.spyOn(rideValidatorStub, 'validate').mockReturnValueOnce(Promise.resolve(false))
 
     const httpResponse = await sut.handle({ body: {} })
 

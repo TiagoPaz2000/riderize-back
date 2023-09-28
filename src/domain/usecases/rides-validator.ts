@@ -1,3 +1,3 @@
 export default interface RidesValidator {
-  validate(ride: any): boolean
+  validate(ride: any): Promise<boolean>
 }
