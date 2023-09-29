@@ -8,5 +8,7 @@ export const ridesMock: RidesEntity[] = [
     startDateRegistration: new Date(),
     endDateRegistration: new Date(),
     startPlace: 'any place',
+    participantsLimit: null,
+    additionalInformation: 'any information',
   }
 ]

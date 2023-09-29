@@ -8,8 +8,7 @@ export default class RidesRepositoryAdapter implements RidesRepository {
   }
 
   async add(ride: Omit<RidesEntity, "id">): Promise<RidesEntity> {
-    const newRide = this.connection.rides.create({ data: ride })
-
+    const newRide = await this.connection.rides.create({ data: ride })
     return newRide
   }
 }
