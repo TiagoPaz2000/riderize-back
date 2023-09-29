@@ -1,0 +1,48 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:10.3
+    restart: always
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=riderize
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "riderize"]
+      timeout: 10s
+      retries: 5
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
+  app:
+    build: ./
+    restart: always
+    platform: linux/amd64
+    container_name: app_back
+    command: dev
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./:/app
+    environment:
+      - DATABASE_URL=postgresql://root:docker@postgres:5432/riderize?schema=riderize
+      - PORT=3001
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres:
+  app:
