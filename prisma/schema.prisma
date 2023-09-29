@@ -9,3 +9,14 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Rides {
+  id    String     @id @default(uuid())
+  name String
+  startDate  DateTime @map("start_date")
+  startDateRegistration  DateTime @map("start_date_registration")
+  endDateRegistration  DateTime @map("end_date_registration")
+  additionalInformation String? @map("additional_registration")
+  startPlace String @map("start_place")
+  participantsLimit Int? @map("participants_limit") 
+}
