@@ -3,12 +3,14 @@ import { makeRideValidatorStub } from '../../stubs/usecases/ride-validator-stub'
 import { makeRidesRepositoryStub } from '../../stubs/usecases/ride-repository-stub'
 import { ridesMock } from '../../stubs/mocks/rides-mock'
 import { ZodError } from 'zod'
+import { makeTokenHandlerStub } from '../../stubs/usecases/token-handler-stub'
 
 describe('AddRidesController', () => {
   const makeSut = () => {
     const rideValidatorStub = makeRideValidatorStub()
-    const RidesRepositoryStub = makeRidesRepositoryStub()
-    const sut = new AddRidesController(rideValidatorStub, RidesRepositoryStub)
+    const ridesRepositoryStub = makeRidesRepositoryStub()
+    const tokenHandlerStub = makeTokenHandlerStub()
+    const sut = new AddRidesController(rideValidatorStub, ridesRepositoryStub, tokenHandlerStub)
     return { sut, rideValidatorStub }
   }
 
