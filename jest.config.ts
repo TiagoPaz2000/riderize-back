@@ -7,6 +7,10 @@ import type {Config} from 'jest'
 
 const config: Config = {
   roots: ['<rootDir>/tests'],
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  setupFilesAfterEnv: ['<rootDir>/tests/unit/stubs/mocks/prisma-mock.ts'],
+  clearMocks: true,
   transform: {
     '^.+\\.ts?$': 'ts-jest',
   },
