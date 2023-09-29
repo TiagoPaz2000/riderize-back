@@ -1,4 +1,4 @@
-import RidesRepositoryAdapter from '@/infra/repositories/rides-repository-adapter';
+import RidesRepositoryAdapter from '@/presentation/adapters/rides-repository-adapter';
 import { prismaMock } from '../../stubs/mocks/prisma-mock';
 import { ridesMock } from '../../stubs/mocks/rides-mock';
 
