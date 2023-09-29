@@ -1,7 +1,7 @@
 import AddRidesController from '@/presentation/controllers/add-rides-controller'
 import { makeRideValidatorStub } from '../../stubs/usecases/ride-validator-stub'
 import { makeRidesRepositoryStub } from '../../stubs/usecases/ride-repository-stub'
-import { ridesMock } from '../../stubs/mocks/rides-mock'
+import { ridesMock } from '../../../mocks/rides-mock'
 import { ZodError } from 'zod'
 import { makeTokenHandlerStub } from '../../stubs/usecases/token-handler-stub'
 

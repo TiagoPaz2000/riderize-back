@@ -1,5 +1,5 @@
 import RidesValidatorAdapter from "@/presentation/adapters/rides-validator-adapter"
-import { ridesMock } from "../../stubs/mocks/rides-mock"
+import { ridesMock } from "../../../mocks/rides-mock"
 import { ridesSchema } from "@/presentation/schemas/rides-validator-schema"
 
 describe('RidesValidatorAdapter', () => {

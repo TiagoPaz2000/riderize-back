@@ -1,5 +1,5 @@
 import RidesRepository from "@/domain/entities/rides-model"
-import { ridesMock } from "../mocks/rides-mock"
+import { ridesMock } from "../../../mocks/rides-mock"
 import RidesEntity from "@/domain/entities/ride-entity"
 
 export const makeRidesRepositoryStub = (): RidesRepository => {
