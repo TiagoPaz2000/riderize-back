@@ -4,7 +4,7 @@ export default interface RidesEntity {
   startDate: Date,
   startDateRegistration: Date,
   endDateRegistration: Date,
-  aditionalInformation?: string,
+  aditionalInformation?: string | null,
   startPlace: string,
-  participantsLimit?: number,
+  participantsLimit?: number | null,
 }

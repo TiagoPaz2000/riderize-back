@@ -1,14 +1,14 @@
 import AddRidesController from '@/presentation/controllers/add-rides-controller'
 import { makeRideValidatorStub } from '../../stubs/usecases/ride-validator-stub'
-import { makeRidesRepositotyStub } from '../../stubs/usecases/ride-repository-stub'
+import { makeRidesRepositoryStub } from '../../stubs/usecases/ride-repository-stub'
 import { ridesMock } from '../../stubs/mocks/rides-mock'
 import { ZodError } from 'zod'
 
 describe('AddRidesController', () => {
   const makeSut = () => {
     const rideValidatorStub = makeRideValidatorStub()
-    const RidesRepositotyStub = makeRidesRepositotyStub()
-    const sut = new AddRidesController(rideValidatorStub, RidesRepositotyStub)
+    const RidesRepositoryStub = makeRidesRepositoryStub()
+    const sut = new AddRidesController(rideValidatorStub, RidesRepositoryStub)
     return { sut, rideValidatorStub }
   }
 
