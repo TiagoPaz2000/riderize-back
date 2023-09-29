@@ -1,5 +1,5 @@
 import RidesEntity from "./ride-entity";
 
-export default interface RidesModel {
+export default interface RidesRepositoty {
   add(Ride: Omit<RidesEntity, 'id'>): Promise<RidesEntity>
 }

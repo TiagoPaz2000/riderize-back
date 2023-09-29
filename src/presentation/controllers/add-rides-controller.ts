@@ -1,18 +1,17 @@
 import RidesValidator from '@/domain/usecases/rides-validator'
 import { IController } from '../protocols/controller-protocol'
 import { IHttpRequest, IHttpResponse } from '../protocols/http-protocol'
-import ErrorEntity from '@/domain/entities/error-entity'
 import { errorHandler } from '../helpers/error-handler'
-import RidesModel from '@/domain/entities/rides-model'
+import RidesRepositoty from '@/domain/entities/rides-model'
 
 export default class AddRidesController implements IController {
-  constructor(private ridesValidator: RidesValidator, private ridesModel: RidesModel) {}
+  constructor(private ridesValidator: RidesValidator, private RidesRepositoty: RidesRepositoty) {}
 
   async handle(request: IHttpRequest): Promise<IHttpResponse> {
     try {
       await this.ridesValidator.validate(request.body)
 
-      const rides = await this.ridesModel.add(request.body)
+      const rides = await this.RidesRepositoty.add(request.body)
 
       return {
         statusCode: 201,
