@@ -1,6 +1,6 @@
 import RidesValidatorAdapter from "@/presentation/adapters/rides-validator-adapter"
 import { ridesMock } from "../../stubs/mocks/rides-mock"
-import { ridesSchema } from "@/presentation/adapters/schemas/rides-validator-schema"
+import { ridesSchema } from "@/presentation/schemas/rides-validator-schema"
 
 describe('RidesValidatorAdapter', () => {
   const makeSut = () => {
