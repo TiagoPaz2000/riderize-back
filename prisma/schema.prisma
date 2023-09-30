@@ -19,22 +19,22 @@ model Rides {
   additionalInformation   String?   @map("additional_registration")
   startPlace              String    @map("start_place")
   participantsLimit       Int?      @map("participants_limit")
-  users UsersOnRides[]
+  users                   UsersOnRides[]
 }
 
 model User {
   id        String  @id @default(uuid())
   username  String  @unique
   password  String
-  rides UsersOnRides[]
+  rides     UsersOnRides[]
 }
 
 model UsersOnRides {
-  user       User     @relation(fields: [userId], references: [id])
-  userId     String @map("user_id")
-  rides       Rides     @relation(fields: [rideId], references: [id])
-  rideId     String @map("ride_id")
-  subscriptionDate DateTime @map("subscription_date")
+user                User      @relation(fields: [userId], references: [id]) 
+userId              String    @map("user_id")
+  rides             Rides     @relation(fields: [rideId], references: [id])
+  rideId            String    @map("ride_id")
+  subscriptionDate  DateTime  @map("subscription_date")
 
   @@id([userId, rideId])
 }
