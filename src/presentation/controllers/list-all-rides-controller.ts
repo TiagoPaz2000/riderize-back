@@ -10,7 +10,7 @@ export default class ListAllRidesController implements IController {
   async handle(request: IHttpRequest): Promise<IHttpResponse> {
     try {
       this.tokenHandler.validate(request.body.authorization)
-      const rides = await this.ridesRepository.add(request.body)
+      const rides = await this.ridesRepository.listAll()
 
       return {
         statusCode: 200,

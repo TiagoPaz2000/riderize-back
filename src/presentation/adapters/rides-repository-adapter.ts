@@ -7,4 +7,9 @@ export default class RidesRepositoryAdapter implements RidesRepository {
     const newRide = await connection.rides.create({ data: ride })
     return newRide
   }
+
+  async listAll(): Promise<RidesEntity[]> {
+    const rides = await connection.rides.findMany()
+    return rides
+  }
 }
