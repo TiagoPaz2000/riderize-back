@@ -1,8 +1,8 @@
-import RidesRepositoryAdapter from "../adapters/rides-repository-adapter"
-import RidesValidatorAdapter from "../adapters/rides-validator-adapter"
-import TokenHandlerAdapter from "../adapters/token-handler-adapter"
-import AddRidesController from "../controllers/add-rides-controller"
-import { IController } from "../protocols/controller-protocol"
+import RidesRepositoryAdapter from '../adapters/rides-repository-adapter'
+import RidesValidatorAdapter from '../adapters/rides-validator-adapter'
+import TokenHandlerAdapter from '../adapters/token-handler-adapter'
+import AddRidesController from '../controllers/add-rides-controller'
+import { IController } from '../protocols/controller-protocol'
 
 export const addRidesFactory = (): IController => {
   const ridesValidatorAdapter = new RidesValidatorAdapter()
