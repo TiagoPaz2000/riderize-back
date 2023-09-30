@@ -1,3 +1,3 @@
 export default interface ValidateSubscriptionDate {
-  validate(endDate: Date): Promise<boolean>
+  validate(endDate: Date): Date
 }
