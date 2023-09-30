@@ -23,7 +23,7 @@ describe('Add Rides Factory', () => {
 
     const response = await sut.handle({
       body: {
-        authorization: 'valid_token',
+        authorization: 'Bearer valid_token',
         ...ridesMock[0]
       }
     })
@@ -38,7 +38,7 @@ describe('Add Rides Factory', () => {
 
     const response = await sut.handle({
       body: {
-        authorization: 'valid_token',
+        authorization: 'Bearer valid_token',
         ...ridesMock[0]
       }
     })
@@ -58,7 +58,7 @@ describe('Add Rides Factory', () => {
     expect(response.body).toEqual({ error: 'jwt must be provided' })
     expect(response.statusCode).toBe(401)
   })
-  
+
   it.todo('should return 401 if token is invalid')
   it.todo('should test if validator is called with correct values')
   it.todo('should return 400 if validator throws')

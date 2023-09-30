@@ -10,7 +10,8 @@ export default class TokenHandlerAdapter implements TokenHandler {
     algorithm: 'HS256'
   } as SignOptions
 
-  validate(token: string): TokenPayload {
+  validate(bearer: string): TokenPayload {
+    const token = bearer ? bearer.split(' ')[1] : bearer
     const tokenPayload = jwt.verify(token, this.secret) as TokenPayload
     return tokenPayload
   }
