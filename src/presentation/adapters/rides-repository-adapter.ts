@@ -12,4 +12,15 @@ export default class RidesRepositoryAdapter implements RidesRepository {
     const rides = await connection.rides.findMany()
     return rides
   }
+
+  async listByUserId(userId: string): Promise<RidesEntity[]> {
+    const rides = (await connection.usersOnRides.findMany({
+      where: {
+        userId: userId
+      },
+      include: { rides: true },
+    })).map((ride) => ride.rides)
+
+    return rides
+  }
 }
