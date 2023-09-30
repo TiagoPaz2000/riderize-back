@@ -3,7 +3,7 @@ import jwt, { SignOptions } from 'jsonwebtoken'
 import { TokenPayload } from "@/domain/entities/token-entity";
 import TokenHandler from "@/domain/usecases/token-handler";
 
-export default class TokenHandlerAdapter implements TokenHandler{
+export default class TokenHandlerAdapter implements TokenHandler {
   private readonly secret = process.env.JWT_SECRET as string
   private readonly options = {
     expiresIn: '1d',

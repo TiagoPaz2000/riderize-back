@@ -15,7 +15,7 @@ describe('Add Rides Factory', () => {
     jest.clearAllMocks()
   })
 
-  it('Should add a new ride on success', async () => {
+  it('should add a new ride on success', async () => {
     const { sut } = makeSut()
     prismaMock.rides.create.mockResolvedValue(ridesMock[0])
     jest.spyOn(jwt, 'verify')
@@ -31,7 +31,21 @@ describe('Add Rides Factory', () => {
     expect(response.body).toEqual(ridesMock[0])
     expect(response.statusCode).toBe(201)
   })
-  it.todo('should test if tokenHandler is called with correct values')
+
+  it('should test if tokenHandler is called with correct values', async () => {
+    const { sut } = makeSut()
+    const jwtStub = jest.spyOn(jwt, 'verify')
+
+    const response = await sut.handle({
+      body: {
+        authorization: 'valid_token',
+        ...ridesMock[0]
+      }
+    })
+
+    expect(jwtStub).toHaveBeenCalledWith('valid_token', process.env.JWT_SECRET)
+  })
+
   it.todo('should return 401 if no token is provided')
   it.todo('should return 401 if token is invalid')
   it.todo('should test if validator is called with correct values')

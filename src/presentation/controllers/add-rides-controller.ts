@@ -14,7 +14,7 @@ export default class AddRidesController implements IController {
 
   async handle(request: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const tokenPayload = this.tokenHandler.validate(request.body.authozitation)
+      const tokenPayload = this.tokenHandler.validate(request.body.authorization)
       await this.ridesValidator.validate(request.body)
 
       const rides = await this.ridesRepository.add(request.body)
