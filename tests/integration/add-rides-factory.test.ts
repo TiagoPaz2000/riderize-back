@@ -1,4 +1,5 @@
 import jwt, { JsonWebTokenError } from 'jsonwebtoken'
+import { ridesSchema } from '@/presentation/schemas/rides-validator-schema'
 
 import { addRidesFactory } from "@/presentation/factories/add-rides-factory"
 import { prismaMock } from "../mocks/prisma-mock"
@@ -61,7 +62,7 @@ describe('Add Rides Factory', () => {
 
   it('should return 401 if token is invalid', async () => {
     const { sut } = makeSut()
-    prismaMock.rides.create.mockResolvedValue(ridesMock[0])
+
     jest.spyOn(jwt, 'verify')
       .mockImplementationOnce(() => { throw new JsonWebTokenError('invalid signature')})
 
@@ -76,7 +77,23 @@ describe('Add Rides Factory', () => {
     expect(response.statusCode).toBe(401)
   })
 
-  it.todo('should test if validator is called with correct values')
+  it('should test if validator is called with correct values', async () => {
+    const { sut } = makeSut()
+    prismaMock.rides.create.mockResolvedValue(ridesMock[0])
+
+    const zodStub = jest.spyOn(ridesSchema, 'parseAsync')
+    jest.spyOn(jwt, 'verify')
+      .mockReturnValueOnce({ id: 'any_id', username: 'any_username' } as any)
+
+    sut.handle({
+      body: {
+        authorization: 'Bearer valid_token',
+        ...ridesMock[0]
+      }
+    })
+
+    expect(zodStub).toBeCalledWith(ridesMock[0])
+  })
   it.todo('should return 400 if validator throws')
   it.todo('should test if ridesRepository is called with correct values')
   it.todo('should return 500 if repository throws')
