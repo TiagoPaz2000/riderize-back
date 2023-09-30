@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt, { JsonWebTokenError } from 'jsonwebtoken'
 
 import { addRidesFactory } from "@/presentation/factories/add-rides-factory"
 import { prismaMock } from "../mocks/prisma-mock"
@@ -59,7 +59,23 @@ describe('Add Rides Factory', () => {
     expect(response.statusCode).toBe(401)
   })
 
-  it.todo('should return 401 if token is invalid')
+  it('should return 401 if token is invalid', async () => {
+    const { sut } = makeSut()
+    prismaMock.rides.create.mockResolvedValue(ridesMock[0])
+    jest.spyOn(jwt, 'verify')
+      .mockImplementationOnce(() => { throw new JsonWebTokenError('invalid signature')})
+
+    const response = await sut.handle({
+      body: {
+        authorization: 'Bearer invalid_token',
+        ...ridesMock[0]
+      }
+    })
+
+    expect(response.body).toEqual({ error: 'invalid signature' })
+    expect(response.statusCode).toBe(401)
+  })
+
   it.todo('should test if validator is called with correct values')
   it.todo('should return 400 if validator throws')
   it.todo('should test if ridesRepository is called with correct values')
