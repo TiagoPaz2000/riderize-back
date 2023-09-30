@@ -7,4 +7,5 @@ export default interface RidesEntity {
   additionalInformation: string | null,
   startPlace: string,
   participantsLimit: number | null,
+  ownerId: string,
 }

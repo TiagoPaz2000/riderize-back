@@ -10,5 +10,6 @@ export const ridesMock: RidesEntity[] = [
     startPlace: 'any place',
     participantsLimit: null,
     additionalInformation: 'any information',
+    ownerId: 'any owner id',
   }
 ]
