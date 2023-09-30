@@ -11,12 +11,29 @@ datasource db {
 }
 
 model Rides {
-  id    String     @id @default(uuid())
-  name String
-  startDate  DateTime @map("start_date")
-  startDateRegistration  DateTime @map("start_date_registration")
-  endDateRegistration  DateTime @map("end_date_registration")
-  additionalInformation String? @map("additional_registration")
-  startPlace String @map("start_place")
-  participantsLimit Int? @map("participants_limit") 
+  id                      String    @id @default(uuid())
+  name                    String
+  startDate               DateTime  @map("start_date")
+  startDateRegistration   DateTime  @map("start_date_registration")
+  endDateRegistration     DateTime  @map("end_date_registration")
+  additionalInformation   String?   @map("additional_registration")
+  startPlace              String    @map("start_place")
+  participantsLimit       Int?      @map("participants_limit")
+  users UsersOnRides[]
+}
+
+model User {
+  id        String  @id @default(uuid())
+  username  String  @unique
+  password  String
+  rides UsersOnRides[]
+}
+
+model UsersOnRides {
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  rides       Rides     @relation(fields: [ridesId], references: [id])
+  ridesId     String
+
+  @@id([userId, ridesId])
 }
