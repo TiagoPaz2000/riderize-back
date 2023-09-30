@@ -16,6 +16,9 @@ export const makeRidesRepositoryStub = (): RidesRepository => {
     listByOwnerId(ownerId: string): Promise<RidesEntity[]> {
       return new Promise(resolve => resolve(ridesMock.filter(ride => ride.ownerId === ownerId)))
     }
+    subcribeOnRide(userId: string, rideId: string, subscriptionDate: Date): Promise<void> {
+      return new Promise(resolve => resolve())
+    }
   }
 
   return new RidesRepositoryStub()

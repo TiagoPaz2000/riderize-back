@@ -5,4 +5,5 @@ export default interface RidesRepository {
   listAll(): Promise<RidesEntity[]>
   listByUserId(userId: string): Promise<RidesEntity[]>
   listByOwnerId(ownerId: string): Promise<RidesEntity[]>
+  subcribeOnRide(userId: string, rideId: string, subscriptionDate: Date): Promise<void>
 }

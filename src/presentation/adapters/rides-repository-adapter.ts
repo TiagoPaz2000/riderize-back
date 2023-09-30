@@ -32,4 +32,14 @@ export default class RidesRepositoryAdapter implements RidesRepository {
     })
     return rides
   }
+
+  async subcribeOnRide(userId: string, rideId: string, subscriptionDate: Date): Promise<void> {
+    await connection.usersOnRides.create({
+      data: {
+        userId,
+        rideId,
+        subscriptionDate,
+      }
+    })
+  }
 }
