@@ -1,4 +1,4 @@
 export default interface EncryptPassword {
-  hash(password: string): string
-  compare(password: string, hash: string): boolean
+  hash(password: string): Promise<string>
+  compare(password: string, hash: string): Promise<boolean>
 }
