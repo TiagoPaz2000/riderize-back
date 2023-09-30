@@ -5,6 +5,7 @@ import EncryptPassword from '@/domain/usecases/hash-password';
 import TokenHandler from '@/domain/usecases/token-handler';
 import { errorHandler } from '../helpers/error-handler';
 import UserRepository from '@/domain/usecases/user-model';
+import ErrorEntity from '@/domain/entities/error-entity';
 
 export default class SignInController implements IController {
   constructor(
@@ -17,7 +18,8 @@ export default class SignInController implements IController {
     try {
       this.signInValidator.validate(request.body);
       const newUser = await this.userRepository.signin({ ...request.body });
-      await this.encryptPassword.compare(request.body.password, newUser.password);
+      const validPass = await this.encryptPassword.compare(request.body.password, newUser.password);
+      if (!validPass) throw new ErrorEntity('Invalid password', 400);
       const token = this.tokenHandler.generate(newUser);
 
       return {
