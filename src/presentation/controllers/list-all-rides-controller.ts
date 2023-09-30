@@ -2,7 +2,7 @@ import TokenHandler from '@/domain/usecases/token-handler';
 import { IController } from '../protocols/controller-protocol';
 import { IHttpRequest, IHttpResponse } from '../protocols/http-protocol';
 import { errorHandler } from '../helpers/error-handler';
-import RidesRepository from '@/domain/entities/rides-model';
+import RidesRepository from '@/domain/usecases/rides-model';
 
 export default class ListAllRidesController implements IController {
   constructor(private ridesRepository: RidesRepository, private tokenHandler: TokenHandler) {}

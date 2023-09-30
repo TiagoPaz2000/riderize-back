@@ -1,4 +1,4 @@
-import RidesEntity from "./ride-entity";
+import RidesEntity from "../entities/ride-entity";
 
 export default interface RidesRepository {
   add(Ride: Omit<RidesEntity, 'id'>): Promise<RidesEntity>

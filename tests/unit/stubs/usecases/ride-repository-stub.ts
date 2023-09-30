@@ -1,4 +1,4 @@
-import RidesRepository from "@/domain/entities/rides-model"
+import RidesRepository from "@/domain/usecases/rides-model"
 import { ridesMock } from "../../../mocks/rides-mock"
 import RidesEntity from "@/domain/entities/ride-entity"
 

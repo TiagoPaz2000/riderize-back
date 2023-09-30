@@ -1,5 +1,5 @@
 import RidesEntity from "@/domain/entities/ride-entity";
-import RidesRepository from "@/domain/entities/rides-model";
+import RidesRepository from "@/domain/usecases/rides-model";
 import connection from "../../infra/database/connection";
 
 export default class RidesRepositoryAdapter implements RidesRepository {
