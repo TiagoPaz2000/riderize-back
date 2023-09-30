@@ -14,7 +14,7 @@ export default class AddRidesController implements IController {
 
   async handle(request: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const tokenPayload = this.tokenHandler.validate(request.body.authorization)
+      this.tokenHandler.validate(request.body.authorization)
       delete request.body.authorization
       await this.ridesValidator.validate(request.body)
 

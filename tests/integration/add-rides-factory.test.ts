@@ -94,6 +94,7 @@ describe('Add Rides Factory', () => {
 
     expect(zodStub).toBeCalledWith(ridesMock[0])
   })
+
   it.todo('should return 400 if validator throws')
   it.todo('should test if ridesRepository is called with correct values')
   it.todo('should return 500 if repository throws')
