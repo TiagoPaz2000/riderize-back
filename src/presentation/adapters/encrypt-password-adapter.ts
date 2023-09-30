@@ -9,5 +9,4 @@ export default class EncryptPasswordAdapter implements EncryptPassword {
   async compare(password: string, hash: string): Promise<boolean> {
     return bcrypt.compare(password, hash)
   }
-  
 }
