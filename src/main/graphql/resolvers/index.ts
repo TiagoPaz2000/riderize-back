@@ -1,5 +1,14 @@
-export default {
+import login from './login'
+import register from './register'
+
+const ping = {
   Query: {
-    ping: () => 'pong'
+    ping: () => 'pong',
   }
 }
+
+export default [
+  ping,
+  login,
+  register
+]
