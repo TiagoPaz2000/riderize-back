@@ -31,3 +31,12 @@ export class ListRideModel {
   @Field(type => [RideModel], { nullable: true })
   declare rides: RideModel[]
 }
+
+@ObjectType()
+export class AddRideModel {
+  @Field({ nullable: true })
+  declare error: String
+
+  @Field({ nullable: true })
+  declare ride: RideModel
+}
