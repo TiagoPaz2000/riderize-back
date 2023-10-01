@@ -8,7 +8,8 @@ import UserResolver from '@/main/graphql/resolvers/'
 
 const apolloServer = async (app: Express): Promise<void> => {
   const schema = await buildSchema({
-    resolvers: [UserResolver]
+    resolvers: [UserResolver],
+    validate: false,
   })
 
   const server = new ApolloServer({
