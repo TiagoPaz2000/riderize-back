@@ -4,6 +4,8 @@ import ErrorEntity from "@/domain/entities/error-entity";
 import { JsonWebTokenError } from "jsonwebtoken";
 
 export const errorHandler = (error: Error): IHttpResponse => {
+  console.log(error);
+  
   if (error instanceof ErrorEntity) {
     return {
       statusCode: error.statusCode,

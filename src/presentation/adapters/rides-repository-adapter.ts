@@ -41,13 +41,13 @@ export default class RidesRepositoryAdapter implements RidesRepository {
         rideId,
         subscriptionDate,
       }
-    }).catch((_err) => { throw new ErrorEntity('Invalid subscription', 400) })
+    }).catch((_err: Error) => { throw new ErrorEntity('Invalid subscription', 400) })
   }
 
   async listById(rideId: string): Promise<RidesEntity> {
     const ride = await connection.rides
       .findUniqueOrThrow({ where: { id: rideId } })
-      .catch((_err) => { throw new ErrorEntity('Ride not found', 400) })
+      .catch((_err: Error) => { throw new ErrorEntity('Ride not found', 400) })
 
     return ride
   }
