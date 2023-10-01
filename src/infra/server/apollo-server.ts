@@ -1,13 +1,18 @@
+import 'reflect-metadata'
+
 import { ApolloServer } from 'apollo-server-express'
 import { Express } from 'express'
+import { buildSchema } from 'type-graphql'
 
-import resolvers from '@/main/graphql/resolvers'
-import typeDefs from '@/main/graphql/type-defs'
+import UserResolver from '@/main/graphql/resolvers/'
 
 const apolloServer = async (app: Express): Promise<void> => {
+  const schema = await buildSchema({
+    resolvers: [UserResolver]
+  })
+
   const server = new ApolloServer({
-    resolvers,
-    typeDefs,
+    schema,
   })
   await server.start();
   server.applyMiddleware({ app })

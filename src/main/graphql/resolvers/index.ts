@@ -1,14 +1,3 @@
-import login from './login'
-import register from './register'
+import UserResolver from './user-resolver';
 
-const ping = {
-  Query: {
-    ping: () => 'pong',
-  }
-}
-
-export default [
-  ping,
-  login,
-  register
-]
+export default UserResolver
