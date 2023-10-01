@@ -1,6 +1,9 @@
 import express from 'express'
+import setupApolloServer from '@/infra/server/apollo-server'
 
 const app = express()
+
+setupApolloServer(app)
 
 app.get('/ping', (_req, res) => {
   res.send('pong')
