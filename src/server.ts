@@ -1,5 +1,6 @@
 import express from 'express'
 import setupApolloServer from '@/infra/server/apollo-server'
+import 'dotenv/config'
 
 const app = express()
 
