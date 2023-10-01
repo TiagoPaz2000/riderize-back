@@ -3,6 +3,8 @@ import { listAllRidesFactory } from '@/presentation/factories/list-all-rides-fac
 import { ListAllRidesInput, AddRideInput } from '../dtos/inputs/rides-input';
 import { ListRideModel, AddRideModel } from '../dtos/models/ride-model';
 import { addRidesFactory } from '@/presentation/factories/add-rides-factory';
+import { listUserRidesFactory } from '@/presentation/factories/list-user-rides-factory';
+import { listOwnerRidesFactory } from '@/presentation/factories/list-owner-rides-factory';
 
 
 @Resolver()
@@ -22,6 +24,24 @@ export default class RideResolver {
 
     const response = await addFactory.handle({ body: data })
     console.log(response);
+    
+    return response.body
+  }
+
+  @Query(() => ListRideModel)
+  async listAllByUserId(@Arg('data') data: ListAllRidesInput) {
+    const listAllFactory = listUserRidesFactory()
+
+    const response = await listAllFactory.handle({ body: data })
+    
+    return response.body
+  }
+
+  @Query(() => ListRideModel)
+  async listAllByOwnerrId(@Arg('data') data: ListAllRidesInput) {
+    const listAllFactory = listOwnerRidesFactory()
+
+    const response = await listAllFactory.handle({ body: data })
     
     return response.body
   }
