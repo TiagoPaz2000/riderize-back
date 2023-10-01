@@ -7,6 +7,12 @@ export class ListAllRidesInput {
 }
 
 @InputType()
+export class SubscribeRideInput extends ListAllRidesInput{
+  @Field()
+  declare rideId: String
+}
+
+@InputType()
 export class AddRideInput {
   @Field()
   declare authorization: String

@@ -1,10 +1,11 @@
 import { Resolver, Query, Arg, Mutation } from 'type-graphql';
 import { listAllRidesFactory } from '@/presentation/factories/list-all-rides-factory';
-import { ListAllRidesInput, AddRideInput } from '../dtos/inputs/rides-input';
-import { ListRideModel, AddRideModel } from '../dtos/models/ride-model';
+import { ListAllRidesInput, AddRideInput, SubscribeRideInput } from '../dtos/inputs/rides-input';
+import { ListRideModel, AddRideModel, SubscribeRideModel } from '../dtos/models/ride-model';
 import { addRidesFactory } from '@/presentation/factories/add-rides-factory';
 import { listUserRidesFactory } from '@/presentation/factories/list-user-rides-factory';
 import { listOwnerRidesFactory } from '@/presentation/factories/list-owner-rides-factory';
+import { ridesSubscribeFactory } from '@/presentation/factories/rides-subscribe-factory';
 
 
 @Resolver()
@@ -23,7 +24,6 @@ export default class RideResolver {
     const addFactory = addRidesFactory()
 
     const response = await addFactory.handle({ body: data })
-    console.log(response);
     
     return response.body
   }
@@ -42,6 +42,15 @@ export default class RideResolver {
     const listAllFactory = listOwnerRidesFactory()
 
     const response = await listAllFactory.handle({ body: data })
+    
+    return response.body
+  }
+
+  @Mutation(() => SubscribeRideModel)
+  async subscribeRide(@Arg('data') data: SubscribeRideInput) {
+    const subscribeFactory = ridesSubscribeFactory()
+
+    const response = await subscribeFactory.handle({ body: data })
     
     return response.body
   }

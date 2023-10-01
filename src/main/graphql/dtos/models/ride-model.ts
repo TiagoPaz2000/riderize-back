@@ -40,3 +40,12 @@ export class AddRideModel {
   @Field({ nullable: true })
   declare ride: RideModel
 }
+
+@ObjectType()
+export class SubscribeRideModel {
+  @Field({ nullable: true })
+  declare error: String
+
+  @Field({ nullable: true })
+  declare message: String
+}
