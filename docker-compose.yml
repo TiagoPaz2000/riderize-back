@@ -31,7 +31,7 @@ services:
     ports:
       - '3001:3001'
     volumes:
-      - ./:/app
+      - ./src:/app/src
     environment:
       - DATABASE_URL=postgresql://root:docker@postgres:5432/riderize?schema=riderize
       - PORT=3001
@@ -45,4 +45,3 @@ services:
 
 volumes:
   postgres:
-  app:
