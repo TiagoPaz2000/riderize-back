@@ -1,3 +1,3 @@
-import UserResolver from './user-resolver';
+import TestResolver from './test-resolver';
 
-export default UserResolver
+export default TestResolver
