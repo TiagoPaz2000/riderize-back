@@ -6,7 +6,7 @@ import ErrorEntity from "@/domain/entities/error-entity";
 export default class UserRepositoryAdapter implements UserRepository {
   async signup(user: Omit<UserEntity, "id">): Promise<UserEntity> {
     const newUser = await connection.user.create({ data: user })
-      .catch((err: Error) => { throw new ErrorEntity(err.message, 400) })
+      .catch((_err: Error) => { throw new ErrorEntity('Invalid user', 400) })
 
     return newUser
   }
