@@ -17,7 +17,7 @@ export default class ListUserRidesController implements IController {
 
       return {
         statusCode: 200,
-        body: rides,
+        body: { rides },
       }
     } catch (error) {
       return errorHandler(error as Error)
