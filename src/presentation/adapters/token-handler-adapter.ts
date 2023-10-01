@@ -17,6 +17,6 @@ export default class TokenHandlerAdapter implements TokenHandler {
   }
   generate({ id, username }: TokenPayload): string {
     const token = jwt.sign({ id, username }, this.secret, this.options)
-    return token
+    return `Bearer ${token}`
   }
 }
