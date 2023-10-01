@@ -3,10 +3,12 @@
     "require": ["tsconfig-paths/register"]
   },
   "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "strict": true,
     "outDir": "build",
     "module": "commonjs",
-    "target": "es2019",
+    "target": "es2021",
     "esModuleInterop": true,
     "sourceMap": true,
     "rootDirs": [
