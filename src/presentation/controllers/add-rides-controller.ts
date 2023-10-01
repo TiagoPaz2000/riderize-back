@@ -14,15 +14,16 @@ export default class AddRidesController implements IController {
 
   async handle(request: IHttpRequest): Promise<IHttpResponse> {
     try {
-      this.tokenHandler.validate(request.body.authorization)
+      const tokenPayload = this.tokenHandler.validate(request.body.authorization)
       delete request.body.authorization
       await this.ridesValidator.validate(request.body)
 
-      const rides = await this.ridesRepository.add(request.body)
-
+      const ride = await this
+        .ridesRepository.add({ ownerId: tokenPayload.id, ...request.body})
+      
       return {
         statusCode: 201,
-        body: rides,
+        body: { ride },
       }
     } catch (error) {
       return errorHandler(error as Error)
