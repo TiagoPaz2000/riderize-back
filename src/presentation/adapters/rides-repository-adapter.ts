@@ -1,17 +1,38 @@
-import RidesEntity from "@/domain/entities/ride-entity";
-import RidesRepository from "@/domain/usecases/rides-model";
-import connection from "../../infra/database/connection";
-import ErrorEntity from "@/domain/entities/error-entity";
+import RidesEntity from '@/domain/entities/ride-entity';
+import RidesRepository from '@/domain/usecases/rides-model';
+import connection from '../../infra/database/connection';
+import ErrorEntity from '@/domain/entities/error-entity';
+import RedisCache from './redis-cache';
 
 export default class RidesRepositoryAdapter implements RidesRepository {
+  private redisCache = new RedisCache()
+
   async add(ride: Omit<RidesEntity, "id">): Promise<RidesEntity> {
     const newRide = await connection.rides.create({ data: ride })
+    await this.redisCache.invalidate('rides')
     return newRide
   }
 
   async listAll(): Promise<RidesEntity[]> {
-    const rides = await connection.rides.findMany()
-    return rides
+    const cachedRides = await this.redisCache.get<RidesEntity[]>('rides')
+    if (!cachedRides) {
+      
+      return connection.rides.findMany()
+        .then(async (rides) => {
+          await this.redisCache.set('rides', rides);
+          return rides;
+        })
+    }
+    
+    return cachedRides.map((ride) => {
+      const dates = {
+        startDate: new Date(ride.startDate),
+        endDateRegistration: new Date(ride.endDateRegistration),
+        startDateRegistration: new Date(ride.startDateRegistration)
+      }
+      
+      return { ...ride, ...dates }
+    })
   }
 
   async listByUserId(userId: string): Promise<RidesEntity[]> {
