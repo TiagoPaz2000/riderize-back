@@ -34,7 +34,7 @@ services:
       - ./src:/app/src
     environment:
       - DATABASE_URL=postgresql://root:docker@postgres:5432/riderize?schema=riderize
-      - PORT=3001
+      - API_PORT=3001
       - JWT_SECRET=secret
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"]
