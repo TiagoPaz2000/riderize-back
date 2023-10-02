@@ -20,7 +20,7 @@ describe('AddRidesController', () => {
     const httpResponse = await sut.handle({ body: {} })
 
     expect(httpResponse.statusCode).toBe(201)
-    expect(httpResponse.body).toEqual(ridesMock[0])
+    expect(httpResponse.body.ride).toEqual(ridesMock[0])
   })
 
   it('should return 400 and error message if RideValidator throws', async () => {

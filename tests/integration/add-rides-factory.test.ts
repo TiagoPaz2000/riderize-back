@@ -29,7 +29,7 @@ describe('Add Rides Factory', () => {
       }
     })
 
-    expect(response.body).toEqual(ridesMock[0])
+    expect(response.body.ride).toEqual(ridesMock[0])
     expect(response.statusCode).toBe(201)
   })
 
