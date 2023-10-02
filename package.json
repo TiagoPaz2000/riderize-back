@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "dev": "nodemon ./src/server.ts",
-    "dev:compose": "prisma generate && npm run dev"
+    "prisma:migrate": "prisma migrate dev",
+    "dev:compose": "npm run prisma:migrate dev && npm run dev"
   },
   "keywords": [],
   "author": "",
