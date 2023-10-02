@@ -16,7 +16,7 @@ export default class RidesSubscribeController implements IController {
     try {
       const tokenPayload = this.tokenHandler.validate(request.body?.authorization)
       const ride = await this.ridesRepository.listById(request.body?.rideId)
-      const dateNow = this.validateSubscriptionDate.validate(ride.endDateRegistration)
+      const dateNow = this.validateSubscriptionDate.validate(ride.endDateRegistration, ride.startDateRegistration)
       await this.ridesRepository.subcribeOnRide(tokenPayload.id, request.body.rideId, dateNow)
 
       return {

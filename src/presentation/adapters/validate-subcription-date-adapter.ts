@@ -3,11 +3,12 @@ import ValidateSubscriptionDate from '@/domain/usecases/validate-subscription-da
 import moment from 'moment'
 
 export default class ValidateSubscriptionDateAdapter implements ValidateSubscriptionDate {
-  validate(endDate: Date): Date {
+  validate(endDate: Date, startDate: Date): Date {
     const now = new Date()
-    const validData = moment(endDate) > moment(now)
+    const validEndDate = moment(endDate) > moment(now)
+    const validStartDate = moment(startDate) < moment(now)
 
-    if (!validData) throw new ErrorEntity('Invalid subscription date', 400)
+    if (!validEndDate || !validStartDate) throw new ErrorEntity('Invalid subscription date', 400)
 
     return now
   }

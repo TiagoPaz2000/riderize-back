@@ -1,3 +1,3 @@
 export default interface ValidateSubscriptionDate {
-  validate(endDate: Date): Date
+  validate(endDate: Date, startDate: Date): Date
 }
