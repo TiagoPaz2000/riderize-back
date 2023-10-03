@@ -26,7 +26,7 @@
 
   - *Acesse a documentação:*
   ```
-    http://localhost:3001 (porta padrão definida)
+    http://localhost:3001
   ```
 
 ### Ambiente de produção
