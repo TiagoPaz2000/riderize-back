@@ -7,9 +7,9 @@
     "test": "jest",
     "dev": "nodemon ./src/server.ts",
     "prisma:migrate": "prisma migrate dev",
-    "dev:compose": "npm run prisma:migrate dev && npm run dev",
+    "dev:compose": "npm run prisma:migrate && npm run dev",
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./build",
-    "start": "npm run build && node ./build/server.js"
+    "start": "npm run build && npm run prisma:migrate && node ./build/server.js"
   },
   "keywords": [],
   "author": "",

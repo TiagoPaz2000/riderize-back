@@ -18,7 +18,7 @@ export default class RidesRepositoryAdapter implements RidesRepository {
     if (!cachedRides) {
       
       return connection.rides.findMany()
-        .then(async (rides) => {
+        .then(async (rides: RidesEntity[]) => {
           await this.redisCache.set('rides', rides);
           return rides;
         })
@@ -41,7 +41,7 @@ export default class RidesRepositoryAdapter implements RidesRepository {
         userId,
       },
       include: { subscriptions: true },
-    })).map((ride) => ride.subscriptions)
+    })).map((ride: { subscriptions: RidesEntity }) => ride.subscriptions)
 
     return rides
   }

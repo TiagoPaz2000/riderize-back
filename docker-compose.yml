@@ -27,7 +27,7 @@ services:
     restart: always
     platform: linux/amd64
     container_name: app_back
-    command: dev:compose
+    command: start
     ports:
       - '3001:3001'
     volumes:
@@ -36,6 +36,10 @@ services:
       - DATABASE_URL=postgresql://root:docker@postgres:5432/riderize?schema=riderize
       - API_PORT=3001
       - JWT_SECRET=secret
+      - teste=teste
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASS=docker
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"]
       timeout: 10s
