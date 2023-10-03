@@ -5,9 +5,9 @@ services:
     restart: always
     container_name: postgres
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=riderize
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
@@ -29,19 +29,18 @@ services:
     container_name: app_back
     command: start
     ports:
-      - '3001:3001'
+      - '3001:${API_PORT}'
     volumes:
       - ./src:/app/src
     environment:
-      - DATABASE_URL=postgresql://root:docker@postgres:5432/riderize?schema=riderize
-      - API_PORT=3001
-      - JWT_SECRET=secret
-      - teste=teste
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - REDIS_PASS=docker
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=${POSTGRES_DB}
+      - API_PORT=${API_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASS=${REDIS_PASS}
     healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3001"]
+      test: ["CMD", "lsof", "-t", "-i:${API_PORT}"]
       timeout: 10s
       retries: 5
     depends_on:
@@ -54,8 +53,8 @@ services:
     image: redis:6.2-alpine
     restart: always
     ports:
-      - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning --requirepass docker
+      - '${REDIS_PORT}:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASS}
     volumes: 
       - cache:/data
     healthcheck:

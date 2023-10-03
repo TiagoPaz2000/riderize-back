@@ -14,9 +14,14 @@
     git clone git@github.com:TiagoPaz2000/riderize-back.git
   ```
 
+  - *Renomeie o arquivo .env.example para .env apenas*
+  ```
+    mv .env.example .env
+  ```
+
   - *Inicie o docker compose:*
   ```
-    docker-compose up -d --build
+    npm run compose:up
   ```
 
   - *Acesse a documentação:*
