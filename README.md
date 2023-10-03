@@ -29,6 +29,13 @@
     http://localhost:3001 (porta padrão definida)
   ```
 
+### Ambiente de produção
+
+  - *Acesse:*
+  ```
+    api-rides.paz-t.com
+  ```
+
 ### Estrutura do projeto
 
   - O servidor inicia no arquivo `./src/server.ts`
